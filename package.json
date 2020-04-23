@@ -1,0 +1,14 @@
+{
+  "name": "assignment11",
+  "version": "1.0.0",
+  "description": "",
+  "main": "employee.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "leeroy",
+  "license": "ISC",
+  "dependencies": {
+    "inquire": "^0.4.8"
+  }
+}

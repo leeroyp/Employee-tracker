@@ -71,21 +71,65 @@ function start() {
 
 
       function viewEmployee(){
-          console.log('view employees')
-      };
+          console.log("Selecting all employees...\n");
+  connection.query("SELECT * FROM empoloyee", function(err, res) {
+    if (err) throw err;
+    // Log all results of the SELECT statement
+    console.log(res);
+    connection.end();
+  });
+        };
+
+
       function viewDepartment(){
-        console.log('view deapartment')
-    }
+        console.log("Selecting all department...\n");
+        connection.query("SELECT * FROM department", function(err, res) {
+          if (err) throw err;
+          // Log all results of the SELECT statement
+          console.log(res);
+          connection.end();
+        });        
+    };
     function viewRoles(){
-        console.log('view roles')
-    }
+        console.log("Selecting all role...\n");
+        connection.query("SELECT * FROM role", function(err, res) {
+          if (err) throw err;
+          // Log all results of the SELECT statement
+          console.log(res);
+          connection.end();
+        });
+    };
 
     function addEmployee(){
-        console.log('add employee')
+       
     }
 
     function addDepartment(){
-        console.log('add deparmtne')
+
+        inquirer
+        .prompt([
+            {
+                name: "addDept",
+                type: "input",
+                message: "What department would you like to add?"
+            }
+        ])
+        .then(function (deptAnswer) {
+            let departmentName = deptAnswer.departmentName;
+            connection.query(
+                "INSERT INTO department(name) VALUES(?)",
+                {
+                    departmentName
+                },
+                function (err, data) {
+                    if (err) {
+                        throw err;
+                    };
+                    console.log(`${departmentName} was added successfully!`);
+                    runSearch();
+                }
+            )
+        })
     }
 
     function addRole(){

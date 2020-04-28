@@ -40,12 +40,13 @@ function start() {
         })
         .then(function(answer) {
             // based on their answer, either call the bid or the post functions
-            if (answer.action === "View employees") {
+
+           if(answer.action === "View department") {
+                viewDepartment();
+           }
+           else if (answer.action === "View employees") {
               viewEmployee();
             }
-           else if(answer.action === "View department") {
-              viewDepartment();
-            } 
             else if(answer.action === "View roles") {
                 viewRoles();
               } 
@@ -76,18 +77,19 @@ function start() {
         })
     };
 
-    function viewDepartment() {
-        connection.query("SELECT * FROM department", function (err, res) {
-            console.table(res);
-            start();
-        })
-    }
     function viewRoles(){
         connection.query("SELECT * FROM roles", function(err, res) {
           console.table(res);
           start();
           
-        });
+        })
+    };
+
+    function viewDepartment() {
+        connection.query("SELECT * FROM departments", function (err, res) {
+            console.table(res)
+            start();
+        })
     };
 
 
@@ -135,20 +137,20 @@ function start() {
         });
 };
 
-    function addDepartment(){
-
-        inquirer.prompt([{
-            type: "input",
-            name: "department",
-            message: "What is the department that you want to add?"
-        }, ]).then(function(res) {
-            connection.query('INSERT INTO department (department) VALUES (?)', [res.department], function(err, res) {
-                if (err) throw err;
-                console.table("Successfully Inserted");
-               start();
-            })
+function addDepartment() {
+    inquirer.prompt([{
+        type: "input",
+        name: "department",
+        message: "What is the department that you want to add?"
+    }, 
+]).then(function(res) {
+        connection.query('INSERT INTO departments (department) VALUES (?)', [res.department], function(err, data) {
+            if (err) throw err;
+            console.table("Successfully Inserted");
+            start();
         })
-    }
+    })
+}
 
     function addRole(){
         inquirer.prompt([

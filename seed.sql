@@ -7,11 +7,10 @@ USE employee_trackerDB;
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
   names VARCHAR(30) ,
-  department_id INT (10)
   PRIMARY KEY (id)
 );
 
-CREATE TABLE role (
+CREATE TABLE roles (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(30),
   salary DECIMAL(10,2) ,
